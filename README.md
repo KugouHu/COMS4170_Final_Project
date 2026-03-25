@@ -12,11 +12,9 @@ A web application built with Flask.
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/KugouHu/COMS4170_Final_Project.git
 cd FINAL_HTML
 ```
-
-Replace `<your-repo-url>` with the actual GitHub repository URL.
 
 ### 2. Create a virtual environment
 
