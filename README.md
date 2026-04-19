@@ -1,6 +1,19 @@
-# COMS4170 Final Project
+# COMS4170 Final Project — Zodiac Constellations
 
-A web application built with Flask.
+An interactive web guide to the 12 zodiac constellations, built with Flask. Users enter their name and birthday to discover their zodiac sign, browse all 12 constellations, learn about each one, and test their knowledge with a quiz.
+
+## Features
+
+- **Personalized start page** — enter your name and birthday to identify your zodiac sign
+- **Home dashboard** — browse all 12 constellations as cards, with your personal sign highlighted
+- **Learn pages** — detailed information on each constellation's star pattern and how to find it in the sky
+- **Quiz** — test your zodiac knowledge
+
+## Tech Stack
+
+- **Backend:** Flask 3.1.3 (Python 3.12+)
+- **Frontend:** Bootstrap 5.3, jQuery 3.6, Jinja2 templates
+- **Styling:** Custom CSS with hover/highlight effects for constellation cards
 
 ## Prerequisites
 
@@ -50,9 +63,13 @@ The app will start at `http://127.0.0.1:5000`.
 
 ```
 FINAL_HTML/
-├── app.py            # Flask application entry point
-├── static/           # Static files (CSS, JS, images)
-├── templates/        # HTML templates
-├── requirements.txt  # Python dependencies
+├── app.py              # Flask application entry point & routes
+├── requirements.txt    # Python dependencies (Flask)
+├── static/
+│   ├── style.css       # Custom styles (constellation cards, highlights)
+│   └── main.js         # Client-side helpers (image fallbacks)
+├── templates/
+│   ├── start.html      # Landing page — name & birthday form
+│   └── home.html       # Dashboard — grid of 12 zodiac constellation cards
 └── README.md
 ```
