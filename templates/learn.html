@@ -14,18 +14,20 @@
 
   <div class="d-flex justify-content-between align-items-start mb-1">
     <div>
-      <h2>
+      <h2 style="font-size: 1.6rem;">
         {{ constellation.name }}
         {% if isUserSign %}
-          <span class="badge bg-warning text-dark" style="font-size:0.7rem; vertical-align:middle;">Your Sign</span>
+          <span class="badge bg-warning ms-2" style="vertical-align: middle;">Your Sign</span>
         {% endif %}
       </h2>
-      <p class="text-muted mb-0">{{ constellation.dates }} &nbsp;|&nbsp; Lesson {{ n }} of {{ total }}</p>
+      <p class="text-muted mb-0" style="font-size: 0.88rem;">
+        {{ constellation.dates }} &nbsp;|&nbsp; Lesson {{ n }} of {{ total }}
+      </p>
     </div>
-    <div class="text-muted small">{{ constellation.symbol }}</div>
+    <div class="constellation-symbol-display">{{ constellation.symbol }}</div>
   </div>
 
-  <div class="progress mb-4" style="height: 6px;">
+  <div class="progress mb-4" style="height: 5px;">
     <div class="progress-bar" style="width: {{ (n / total * 100)|int }}%;"></div>
   </div>
 
@@ -34,8 +36,8 @@
     <div class="col-md-5">
       <img src="{{ constellation.image }}"
            alt="{{ constellation.name }} constellation map"
-           class="img-fluid rounded border learnImg"
-           style="width:100%;">
+           class="img-fluid rounded learnImg"
+           style="width: 100%;">
     </div>
 
     <div class="col-md-7">
@@ -45,13 +47,14 @@
 
       {% if isUserSign %}
       <div class="alert alert-warning py-2 px-3">
-        <strong>Your zodiac sign!</strong> The Sun was passing through {{ constellation.name }} when you were born.
+        <strong>Your zodiac sign!</strong>
+        The Sun was passing through {{ constellation.name }} when you were born.
       </div>
       {% endif %}
 
       <h5 class="mt-3">Key Stars</h5>
       <table class="table table-sm table-bordered">
-        <thead class="table-light">
+        <thead>
           <tr><th>Star</th><th>Magnitude</th><th>Notes</th></tr>
         </thead>
         <tbody>
@@ -83,7 +86,7 @@
     {% endif %}
 
     {% if nextN %}
-      <a href="/learn/{{ nextN }}" class="btn btn-primary">Next: {{ constellation.name }} is done, onward &rarr;</a>
+      <a href="/learn/{{ nextN }}" class="btn btn-primary">Next &rarr;</a>
     {% else %}
       <a href="/quiz/1" class="btn btn-success">Finished! Take the Quiz &rarr;</a>
     {% endif %}

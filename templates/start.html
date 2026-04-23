@@ -8,27 +8,38 @@
 </head>
 <body>
 <div class="container mt-5" style="max-width: 480px;">
-  <h1 class="mb-1">Zodiac Constellations</h1>
-  <p class="text-muted mb-4">An interactive guide to the 12 constellations of the zodiac.</p>
+
+  <div class="start-hero mb-1">
+    <h1 class="mb-1" style="font-size: 2rem; letter-spacing: 0.08em;">Zodiac Constellations</h1>
+    <p class="text-muted mb-0" style="font-size: 0.92rem; letter-spacing: 0.04em;">
+      An interactive guide to the 12 constellations of the zodiac
+    </p>
+  </div>
+
+  <div class="star-divider my-4">✦</div>
 
   <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Get Started</h5>
+    <div class="card-body p-4">
+      <h5 class="card-title mb-3" style="letter-spacing: 0.05em;">Begin Your Journey</h5>
       <form action="/" method="POST">
         <div class="mb-3">
           <label for="name" class="form-label">Your Name</label>
           <input type="text" class="form-control" id="name" name="name" required placeholder="Enter your name">
         </div>
-        <div class="mb-3">
+        <div class="mb-4">
           <label for="birthday" class="form-label">Birthday</label>
           <input type="date" class="form-control" id="birthday" name="birthday" required>
-          <div class="form-text">We will highlight your personal zodiac sign throughout the website.</div>
+          <div class="form-text mt-1">We'll highlight your personal zodiac sign throughout the site.</div>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Start Learning</button>
+        <button type="submit" class="btn btn-primary w-100" style="letter-spacing: 0.04em;">
+          Start Learning &nbsp;→
+        </button>
       </form>
     </div>
   </div>
+
 </div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>

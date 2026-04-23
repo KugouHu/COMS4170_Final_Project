@@ -12,21 +12,23 @@
 
 <div class="container mt-4" style="max-width: 700px;">
 
-  <h4>Zodiac Quiz &mdash; Question {{ n }} of {{ total }}</h4>
-  <div class="progress mb-3" style="height: 6px;">
+  <h4 style="font-size: 1.2rem; letter-spacing: 0.04em;">
+    Zodiac Quiz &mdash; Question {{ n }} of {{ total }}
+  </h4>
+  <div class="progress mb-3" style="height: 5px;">
     <div class="progress-bar bg-success" style="width: {{ (n / total * 100)|int }}%;"></div>
   </div>
 
   <div class="card mb-3">
     <div class="card-body">
-      <p class="fs-5 mb-3">{{ question.question }}</p>
+      <p class="fs-5 mb-3" style="color: #e8e8f8;">{{ question.question }}</p>
 
       {% if imgConstellation %}
       <div class="mb-3 text-center">
         <img src="{{ imgConstellation.image }}"
              alt="Constellation image"
              class="quizImg"
-             style="max-height: 220px; max-width: 100%; border: 1px solid #ddd; border-radius: 4px;">
+             style="max-height: 220px; max-width: 100%;">
       </div>
       {% endif %}
 
@@ -35,7 +37,8 @@
         <div class="mb-2">
           <button type="submit" name="answer" value="{{ i }}"
                   class="btn btn-outline-secondary w-100 text-start {% if prevAnswer == i %}active{% endif %}">
-            <strong>{{ ['A', 'B', 'C', 'D'][i] }}.</strong>  {{ question.answers[i] }}
+            <strong style="color: #f4c842;">{{ ['A', 'B', 'C', 'D'][i] }}.</strong>
+            &nbsp;{{ question.answers[i] }}
           </button>
         </div>
         {% endfor %}

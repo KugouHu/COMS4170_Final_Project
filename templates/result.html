@@ -12,24 +12,25 @@
 
 <div class="container mt-4" style="max-width: 700px;">
 
-  <h3>Quiz Results</h3>
+  <h3 style="letter-spacing: 0.05em;">Quiz Results</h3>
 
   <div class="card mb-4">
     <div class="card-body">
-      <h4>
-        {{ userName }}, you scored <strong>{{ score }} / {{ total }}</strong>.
+      <h4 style="color: #e8e8f8;">
+        {{ userName }}, you scored
+        <strong style="color: #f4c842;">{{ score }} / {{ total }}</strong>
       </h4>
       {% if score == total %}
-        <p class="text-success mb-0">Perfect score! Excellent job!</p>
+        <p class="text-success mb-0">✦ Perfect score! The stars align for you.</p>
       {% elif score >= 3 %}
-        <p class="text-primary mb-0">Good job! Review the ones you missed below.</p>
+        <p class="text-primary mb-0">Good work! Review the ones you missed below.</p>
       {% else %}
-        <p class="text-danger mb-0">Keep practicing! Go back through the lessons and try again.</p>
+        <p style="color: #ff6b8a;" class="mb-0">Keep exploring — go back through the lessons and try again.</p>
       {% endif %}
 
       {% if userSignConstellation %}
       <p class="text-muted small mt-2 mb-0">
-        Your zodiac sign is <strong>{{ userSignConstellation.name }}</strong>
+        Your sign is <strong style="color: #f4c842;">{{ userSignConstellation.name }}</strong>
         ({{ userSignConstellation.dates }}).
         <a href="/learn/{{ userSignConstellation.id }}">Review its lesson &rarr;</a>
       </p>
@@ -37,20 +38,20 @@
     </div>
   </div>
 
-  <h5 class="mb-3">Answer Breakdown</h5>
+  <h5 class="mb-3" style="letter-spacing: 0.04em;">Answer Breakdown</h5>
 
   {% for r in results %}
   <div class="card mb-3 border-{{ 'success' if r.isCorrect else 'danger' }}">
-    <div class="card-header bg-{{ 'success' if r.isCorrect else 'danger' }} text-white py-1 px-3">
-      Q{{ loop.index }}: {{ 'Correct' if r.isCorrect else 'Incorrect' }}
+    <div class="card-header bg-{{ 'success' if r.isCorrect else 'danger' }} py-1 px-3" style="font-size: 0.85rem; font-family: 'Cinzel', serif; letter-spacing: 0.04em;">
+      Q{{ loop.index }}: {{ 'Correct ✦' if r.isCorrect else 'Incorrect' }}
     </div>
     <div class="card-body py-2 px-3">
-      <p class="mb-1">{{ r.question }}</p>
+      <p class="mb-1" style="color: #c8d4e8;">{{ r.question }}</p>
       {% if r.chosen is not none %}
         <p class="mb-1 small">
           Your answer: <strong>{{ r.answers[r.chosen] }}</strong>
           {% if not r.isCorrect %}
-            &mdash; Correct answer: <strong>{{ r.answers[r.correctIdx] }}</strong>
+            &mdash; Correct: <strong style="color: #2dd4a0;">{{ r.answers[r.correctIdx] }}</strong>
           {% endif %}
         </p>
       {% else %}
@@ -61,7 +62,7 @@
   </div>
   {% endfor %}
 
-  <div class="d-flex gap-2 mt-3 mb-5">
+  <div class="d-flex gap-2 mt-3 mb-5 flex-wrap">
     <a href="/quiz/1" class="btn btn-primary">Retake Quiz</a>
     <a href="/home" class="btn btn-outline-secondary">Back to Home</a>
     <a href="/learn/1" class="btn btn-outline-secondary">Review Lessons</a>
