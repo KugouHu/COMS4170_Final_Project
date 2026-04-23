@@ -249,9 +249,12 @@ a:not(.btn):not(.navbar-brand):hover { color: var(--gold); }
    TABLES
    =================================================== */
 .table {
-  color: var(--silver) !important;
+  color: var(--star-white) !important;
   --bs-table-bg: transparent;
   --bs-table-border-color: var(--border-glow);
+}
+.table td, .table th {
+  color: var(--star-white) !important;
 }
 .table-bordered, .table-bordered > :not(caption) > * {
   border-color: var(--border-glow) !important;
