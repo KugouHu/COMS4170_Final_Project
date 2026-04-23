@@ -1,13 +1,14 @@
 # COMS4170 Final Project — Zodiac Constellations
 
-An interactive web guide to the 12 zodiac constellations, built with Flask. Users enter their name and birthday to discover their zodiac sign, browse all 12 constellations, learn about each one, and test their knowledge with a quiz.
+An interactive web guide to the 12 zodiac constellations, built with Flask. Users enter their name and birthday to discover their zodiac sign, browse all 12 constellations, learn the details of each one, and test their knowledge with a short quiz.
 
 ## Features
 
 - **Personalized start page** — enter your name and birthday to identify your zodiac sign
-- **Home dashboard** — browse all 12 constellations as cards, with your personal sign highlighted
-- **Learn pages** — detailed information on each constellation's star pattern and how to find it in the sky
-- **Quiz** — test your zodiac knowledge
+- **Home dashboard** — all 12 constellations shown as cards, with your personal sign highlighted
+- **Learn pages** — per-constellation details including description, key stars (with magnitudes), how to find it in the sky, and a fun fact, with prev/next navigation through all 12
+- **Quiz** — 5 multiple-choice questions drawn from the learn content, some with a constellation image prompt
+- **Results page** — per-question score, correct/incorrect indicator, and an explanation for the answer you chose
 
 ## Tech Stack
 
@@ -54,22 +55,35 @@ pip install -r requirements.txt
 ### 4. Run the application
 
 ```bash
-python app.py
+python server.py
 ```
 
 The app will start at `http://127.0.0.1:5000`.
+
+## Routes
+
+- `/` — Start page: name & birthday form; redirects to `/home` once submitted
+- `/home` — Dashboard with the 12 constellation cards
+- `/learn/<n>` — Learn page for constellation `n` (1–12)
+- `/quiz/<n>` — Quiz question `n` (1–5)
+- `/quiz/<n>/answer` — POST handler that records the chosen answer and advances
+- `/result` — Final score and per-question review
 
 ## Project Structure
 
 ```
 FINAL_HTML/
-├── app.py              # Flask application entry point & routes
+├── server.py           # Flask app: routes, constellation/quiz data, zodiac logic
 ├── requirements.txt    # Python dependencies (Flask)
 ├── static/
 │   ├── style.css       # Custom styles (constellation cards, highlights)
 │   └── main.js         # Client-side helpers (image fallbacks)
 ├── templates/
+│   ├── navbar.html     # Shared top navigation
 │   ├── start.html      # Landing page — name & birthday form
-│   └── home.html       # Dashboard — grid of 12 zodiac constellation cards
+│   ├── home.html       # Dashboard — grid of 12 zodiac constellation cards
+│   ├── learn.html      # Per-constellation detail page
+│   ├── quiz.html       # Quiz question page
+│   └── result.html     # Quiz results & review
 └── README.md
 ```
