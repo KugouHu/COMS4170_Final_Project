@@ -1,7 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-dark border-bottom">
   <div class="container">
     <a class="navbar-brand" href="/home">✦ Zodiac Constellations</a>
-    <div class="d-flex gap-2">
+    <div class="d-flex gap-2 align-items-center">
+      {% if userName %}
+      <div class="dropdown">
+        <button class="btn btn-sm btn-outline-secondary profile-btn dropdown-toggle d-flex align-items-center"
+                type="button" id="profileDropdown"
+                data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="profile-avatar"><span>{{ userName[0]|upper }}</span></span>
+          <span class="profile-name ms-2">{{ userName }}</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end profile-menu" aria-labelledby="profileDropdown">
+          <li class="profile-header text-muted">
+            <span class="profile-header-label">Sign in as</span>
+            <strong class="profile-header-name">{{ userName }}</strong>
+            {% if userBirthday %}<span class="profile-birthday">🎂 {{ userBirthday }}</span>{% endif %}
+          </li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a href="/switch" class="dropdown-item">Switch Profile</a></li>
+        </ul>
+      </div>
+      <span class="nav-divider" aria-hidden="true"></span>
+      {% endif %}
       <a href="/home" class="btn btn-sm btn-outline-secondary">Home</a>
       <a href="/quiz/1" class="btn btn-sm btn-outline-primary">Quiz</a>
     </div>

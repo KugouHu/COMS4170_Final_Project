@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
+import random
 
 app = Flask(__name__)
 app.secret_key = "zodiac_hw10"
+
+QUIZ_LENGTH = 5
 
 userData = {
     "name": "",
@@ -11,6 +14,7 @@ userData = {
     "startTime": None,
     "learnVisits": {},
     "quizAnswers": {},
+    "quizQuestions": [],
 }
 
 data = {
@@ -534,6 +538,110 @@ data = {
                 "Incorrect. Aldebaran does not orbit the Hyades. It just happens to be lined up in the same direction.",
             ],
         },
+        {
+            "id": 6,
+            "question": (
+                "According to the Aries lesson, what color and type of star is "
+                "Hamal, the brightest star in Aries?"
+            ),
+            "imageConstellationId": 1,
+            "answers": [
+                "An orange giant",
+                "A blue-white supergiant",
+                "A red dwarf",
+                "A yellow main-sequence star",
+            ],
+            "correct": 0,
+            "explanations": [
+                "Correct! The Aries lesson describes Hamal as an orange giant about 66 light-years away, with a warm orange tint that helps it stand out.",
+                "Incorrect. The lesson describes Hamal as an orange giant, not a blue-white supergiant.",
+                "Incorrect. Hamal is an orange giant, not a red dwarf.",
+                "Incorrect. The Aries lesson specifically calls Hamal an orange giant.",
+            ],
+        },
+        {
+            "id": 7,
+            "question": (
+                "The Cancer lesson highlights one famous deep-sky object as the main "
+                "reason to seek the constellation out. What is it?"
+            ),
+            "imageConstellationId": 4,
+            "answers": [
+                "The Beehive Cluster (M44)",
+                "The Pleiades",
+                "The Crab Nebula",
+                "The Helix Nebula",
+            ],
+            "correct": 0,
+            "explanations": [
+                "Correct! The Cancer lesson points to the Beehive Cluster (M44, also called Praesepe) as the main reason to look at Cancer.",
+                "Incorrect. The Pleiades belong to Taurus, not Cancer.",
+                "Incorrect. The Crab Nebula is in Taurus. The Cancer highlight is the Beehive Cluster.",
+                "Incorrect. The Helix Nebula sits in Aquarius. Cancer's highlight is the Beehive Cluster.",
+            ],
+        },
+        {
+            "id": 8,
+            "question": (
+                "The Gemini fun fact reveals something surprising about Castor. "
+                "What is it?"
+            ),
+            "imageConstellationId": 3,
+            "answers": [
+                "It is actually six stars: three pairs of binaries orbiting each other",
+                "It is the closest star to Earth besides the Sun",
+                "It hosts a confirmed exoplanet larger than Jupiter",
+                "It is a hidden black hole disguised as a single star",
+            ],
+            "correct": 0,
+            "explanations": [
+                "Correct! The Gemini fun fact says Castor looks like one star but is actually six stars total — three binary pairs all orbiting each other.",
+                "Incorrect. Castor is roughly 50 light-years away. The Gemini fun fact is about its six-star system.",
+                "Incorrect. The lesson notes Pollux (not Castor) hosts a confirmed exoplanet. The Castor fun fact is its six-star system.",
+                "Incorrect. Castor is a six-star system, not a black hole.",
+            ],
+        },
+        {
+            "id": 9,
+            "question": (
+                "According to the Aquarius lesson, what makes the Helix Nebula notable?"
+            ),
+            "imageConstellationId": 11,
+            "answers": [
+                "It is the closest planetary nebula to Earth",
+                "It is the largest emission nebula in the night sky",
+                "It is the brightest nebula visible without any optical aid",
+                "It is the youngest nebula ever discovered",
+            ],
+            "correct": 0,
+            "explanations": [
+                "Correct! The Aquarius lesson states the Helix Nebula is the closest planetary nebula to Earth, about 650 light-years away.",
+                "Incorrect. The lesson does not call it the largest emission nebula. It calls it the closest planetary nebula.",
+                "Incorrect. The lesson highlights its proximity, not naked-eye brightness.",
+                "Incorrect. The lesson says it is the closest planetary nebula, not the youngest.",
+            ],
+        },
+        {
+            "id": 10,
+            "question": (
+                "In the Pisces lesson, what is the name of the star that marks the "
+                "knot tying the two fish together?"
+            ),
+            "imageConstellationId": 12,
+            "answers": [
+                "Al Rischa",
+                "Eta Piscium",
+                "Gamma Piscium",
+                "Spica",
+            ],
+            "correct": 0,
+            "explanations": [
+                "Correct! The Pisces lesson identifies Al Rischa as the knot tying the two fish together. It is also a binary star.",
+                "Incorrect. Eta Piscium is the brightest star in Pisces, not the knot. The knot is Al Rischa.",
+                "Incorrect. Gamma Piscium sits in the body of the western fish, not at the knot.",
+                "Incorrect. Spica is in Virgo, not Pisces.",
+            ],
+        },
     ],
 }
 
@@ -568,6 +676,24 @@ def getConstellationById(cid):
             return c
     return None
 
+def pickQuizQuestions():
+    bank = data["quiz"]
+    k = min(QUIZ_LENGTH, len(bank))
+    userData["quizQuestions"] = random.sample(bank, k)
+    userData["quizAnswers"] = {}
+
+def formatBirthday(s):
+    try:
+        return datetime.strptime(s, "%Y-%m-%d").strftime("%b %d, %Y")
+    except Exception:
+        return s
+
+@app.context_processor
+def injectUser():
+    return {
+        "userBirthday": formatBirthday(userData["birthday"]),
+    }
+
 @app.route("/", methods=["GET", "POST"])
 def start():
     if request.method == "POST":
@@ -577,10 +703,22 @@ def start():
         userData["startTime"]   = datetime.now().isoformat()
         userData["learnVisits"] = {}
         userData["quizAnswers"] = {}
+        userData["quizQuestions"] = []
         return redirect(url_for("home"))
     if userData["name"]:
         return redirect(url_for("home"))
     return render_template("start.html")
+
+@app.route("/switch", methods=["POST", "GET"])
+def switchProfile():
+    userData["name"]          = ""
+    userData["birthday"]      = ""
+    userData["zodiacSign"]    = ""
+    userData["startTime"]     = None
+    userData["learnVisits"]   = {}
+    userData["quizAnswers"]   = {}
+    userData["quizQuestions"] = []
+    return redirect(url_for("start"))
 
 @app.route("/home")
 def home():
@@ -620,10 +758,19 @@ def learn(n):
 def quiz(n):
     if not userData["name"]:
         return redirect(url_for("start"))
-    total = len(data["quiz"])
+
+    quizSet = userData.get("quizQuestions") or []
+    if not quizSet:
+        pickQuizQuestions()
+        quizSet = userData["quizQuestions"]
+    elif n == 1 and len(userData["quizAnswers"]) >= len(quizSet):
+        pickQuizQuestions()
+        quizSet = userData["quizQuestions"]
+
+    total = len(quizSet)
     if n < 1 or n > total:
         return redirect(url_for("result"))
-    q = data["quiz"][n - 1]
+    q = quizSet[n - 1]
     imgC = getConstellationById(q["imageConstellationId"]) if q["imageConstellationId"] else None
     return render_template(
         "quiz.html",
@@ -640,7 +787,7 @@ def quizAnswer(n):
     chosen = request.form.get("answer")
     if chosen is not None:
         userData["quizAnswers"][str(n)] = int(chosen)
-    if n < len(data["quiz"]):
+    if n < len(userData.get("quizQuestions") or []):
         return redirect(url_for("quiz", n=n + 1))
     return redirect(url_for("result"))
 
@@ -648,9 +795,10 @@ def quizAnswer(n):
 def result():
     if not userData["name"]:
         return redirect(url_for("start"))
+    quizSet = userData.get("quizQuestions") or []
     score = 0
     results = []
-    for i, q in enumerate(data["quiz"]):
+    for i, q in enumerate(quizSet):
         ans = userData["quizAnswers"].get(str(i + 1))
         correct = (ans is not None and ans == q["correct"])
         if correct:
@@ -667,7 +815,7 @@ def result():
     return render_template(
         "result.html",
         score=score,
-        total=len(data["quiz"]),
+        total=len(quizSet),
         results=results,
         userName=userData["name"],
         userSignConstellation=userSignC,
