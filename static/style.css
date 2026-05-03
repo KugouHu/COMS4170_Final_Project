@@ -465,12 +465,15 @@ hr {
   border: 1px solid var(--border-glow);
   min-width: 0;
   width: 100%;
-  padding: 0.35rem 0 0 0;
+  padding: 0.35rem 0.55rem 0;
   font-size: 0.78rem;
+  overflow: hidden;
 }
 .profile-menu .dropdown-item {
   color: var(--silver);
   padding: 0.35rem 0.75rem;
+  margin: 0 -0.55rem;
+  width: calc(100% + 1.1rem);
   font-size: 0.78rem;
   white-space: nowrap;
   text-align: center;
@@ -482,7 +485,7 @@ hr {
 }
 .profile-menu .dropdown-divider {
   border-color: var(--border-glow);
-  margin: 0.25rem 0 0 0;
+  margin: 0.25rem -0.55rem 0;
 }
 .profile-header {
   display: block;
@@ -509,4 +512,57 @@ hr {
   color: var(--silver-dim);
   letter-spacing: 0.02em;
   white-space: nowrap;
+  font-size: 0.72rem;
+}
+
+/* ===================================================
+   BEST-SCORE PILL — tier-tinted achievement chip
+   Lives in the navbar profile dropdown, after birthday.
+   =================================================== */
+.profile-best-score {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.22rem;
+  margin: 0.32rem auto 0;
+  padding: 0.14rem 0.6rem;
+  border: 1px solid var(--border-glow);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.025);
+  font-size: 0.58rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--silver-dim);
+  white-space: nowrap;
+}
+.profile-best-score .bs-icon  { font-size: 0.68rem; letter-spacing: 0; }
+.profile-best-score .bs-value {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: 0.64rem;
+}
+.profile-best-score.tier-bronze {
+  border-color: rgba(100, 149, 237, 0.28);
+  background: rgba(74, 158, 255, 0.06);
+}
+.profile-best-score.tier-bronze .bs-value { color: var(--cosmic-blue); }
+.profile-best-score.tier-silver {
+  border-color: rgba(200, 212, 232, 0.4);
+  background: rgba(200, 212, 232, 0.07);
+  color: var(--silver);
+}
+.profile-best-score.tier-silver .bs-value {
+  color: #e6edf7;
+  text-shadow: 0 0 8px rgba(200, 212, 232, 0.4);
+}
+.profile-best-score.tier-gold {
+  border-color: var(--gold-dim);
+  background: rgba(244, 200, 66, 0.1);
+  color: var(--gold-soft);
+  box-shadow: 0 0 14px rgba(244, 200, 66, 0.18);
+}
+.profile-best-score.tier-gold .bs-value {
+  color: var(--gold);
+  text-shadow: 0 0 10px rgba(244, 200, 66, 0.5);
 }

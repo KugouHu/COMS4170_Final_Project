@@ -15,6 +15,7 @@ userData = {
     "learnVisits": {},
     "quizAnswers": {},
     "quizQuestions": [],
+    "highestScore": None,
 }
 
 data = {
@@ -692,6 +693,7 @@ def formatBirthday(s):
 def injectUser():
     return {
         "userBirthday": formatBirthday(userData["birthday"]),
+        "userHighestScore": userData.get("highestScore"),
     }
 
 @app.route("/", methods=["GET", "POST"])
@@ -704,6 +706,7 @@ def start():
         userData["learnVisits"] = {}
         userData["quizAnswers"] = {}
         userData["quizQuestions"] = []
+        userData["highestScore"] = None
         return redirect(url_for("home"))
     if userData["name"]:
         return redirect(url_for("home"))
@@ -718,6 +721,7 @@ def switchProfile():
     userData["learnVisits"]   = {}
     userData["quizAnswers"]   = {}
     userData["quizQuestions"] = []
+    userData["highestScore"]  = None
     return redirect(url_for("start"))
 
 @app.route("/home")
@@ -811,11 +815,15 @@ def result():
             "explanation": q["explanations"][ans] if ans is not None else "No answer recorded.",
             "isCorrect":  correct,
         })
+    total = len(quizSet)
+    pct = round(score / total * 100) if total else 0
+    prior = userData.get("highestScore")
+    userData["highestScore"] = pct if prior is None else max(prior, pct)
     userSignC = getConstellationBySign(userData["zodiacSign"])
     return render_template(
         "result.html",
         score=score,
-        total=len(quizSet),
+        total=total,
         results=results,
         userName=userData["name"],
         userSignConstellation=userSignC,

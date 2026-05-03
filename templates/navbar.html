@@ -15,6 +15,12 @@
             <span class="profile-header-label">Sign in as</span>
             <strong class="profile-header-name">{{ userName }}</strong>
             {% if userBirthday %}<span class="profile-birthday">🎂 {{ userBirthday }}</span>{% endif %}
+            {% if userHighestScore is not none %}
+            {% set bsTier = 'tier-gold' if userHighestScore >= 80 else ('tier-silver' if userHighestScore >= 60 else 'tier-bronze') %}
+            <span class="profile-best-score {{ bsTier }}">
+              <span class="bs-icon">🏆</span><span class="bs-label">Best</span><span class="bs-value">{{ userHighestScore }}%</span>
+            </span>
+            {% endif %}
           </li>
           <li><hr class="dropdown-divider"></li>
           <li><a href="/switch" class="dropdown-item">Switch Profile</a></li>
