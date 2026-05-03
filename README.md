@@ -5,7 +5,7 @@ An interactive web guide to the 12 zodiac constellations, built with Flask. User
 ## Features
 
 - **Personalized start page** — enter your name and birthday to identify your zodiac sign
-- **Profile dropdown** — top-right navbar shows a gold avatar with your initial, name, and formatted birthday; a "Switch Profile" option clears your session and returns to the start page
+- **Profile dropdown** — top-right navbar shows a gold avatar with your initial, name, and formatted birthday. After your first quiz, a tier-tinted "best score" pill (`🏆 BEST 75%`) appears below the birthday — bronze (<60%), silver (≥60%), gold (≥80%) — tracking your highest percentage for the session. A "Switch Profile" option clears your session and returns to the start page.
 - **Home dashboard** — all 12 constellations shown as cards, with your personal sign highlighted
 - **Learn pages** — per-constellation details including description, key stars (with magnitudes), how to find it in the sky, and a fun fact, with prev/next navigation through all 12
 - **Randomized quiz** — 10-question bank drawn from the learn content; each attempt randomly selects 5 questions, so retaking the quiz yields a fresh mix
@@ -69,7 +69,7 @@ The app will start at `http://127.0.0.1:5000`.
 - `/learn/<n>` — Learn page for constellation `n` (1–12)
 - `/quiz/<n>` — Quiz question `n` (1–5 of the randomly selected subset). On entry to `/quiz/1` with no in-progress attempt (or after a completed quiz), 5 questions are freshly drawn from the 10-question bank.
 - `/quiz/<n>/answer` — POST handler that records the chosen answer and advances
-- `/result` — Final score and per-question review for the 5 questions attempted
+- `/result` — Final score and per-question review for the 5 questions attempted. Also updates the session's highest-score percentage (via `max()`), which the navbar's profile dropdown reads to render the best-score pill.
 
 ## Quiz Randomization
 
