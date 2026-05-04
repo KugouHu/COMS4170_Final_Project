@@ -29,6 +29,8 @@
         <p style="color: #ff6b8a;" class="mb-0">Keep exploring — go back through the lessons and try again.</p>
       {% endif %}
 
+      <p class="text-muted small mt-2 mb-0">Time taken: <strong id="quiz-elapsed">—</strong></p>
+
       {% if userSignConstellation %}
       <p class="text-muted small mt-2 mb-0">
         Your sign is <strong style="color: #f4c842;">{{ userSignConstellation.name }}</strong>
@@ -74,5 +76,17 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ url_for('static', filename='main.js') }}"></script>
+<script>
+  (function () {
+    const start = parseInt(localStorage.getItem('quizStartTime'));
+    if (start) {
+      const secs = Math.round((Date.now() - start) / 1000);
+      const mins = Math.floor(secs / 60);
+      const s = secs % 60;
+      document.getElementById('quiz-elapsed').textContent =
+        mins > 0 ? mins + 'm ' + s + 's' : s + 's';
+    }
+  })();
+</script>
 </body>
 </html>

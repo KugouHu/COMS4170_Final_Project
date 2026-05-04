@@ -13,9 +13,12 @@
 
 <div class="container mt-4" style="max-width: 700px;">
 
-  <h4 style="font-size: 1.2rem; letter-spacing: 0.04em;">
-    Zodiac Quiz &mdash; Question {{ n }} of {{ total }}
-  </h4>
+  <div class="d-flex justify-content-between align-items-center mb-1">
+    <h4 class="mb-0" style="font-size: 1.2rem; letter-spacing: 0.04em;">
+      Zodiac Quiz &mdash; Question {{ n }} of {{ total }}
+    </h4>
+    <span id="quiz-timer" class="badge bg-secondary fs-6" data-n="{{ n }}" style="min-width: 3.5rem; text-align: center;">30s</span>
+  </div>
   <div class="progress mb-3" style="height: 5px;">
     <div class="progress-bar bg-success" style="width: {{ (n / total * 100)|int }}%;"></div>
   </div>
@@ -61,5 +64,43 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ url_for('static', filename='main.js') }}"></script>
+<script>
+  (function () {
+    const QUESTION_TIME = 30;
+    const el = document.getElementById('quiz-timer');
+    const n = parseInt(el.dataset.n, 10);
+
+    if (n === 1) {
+      for (let i = 1; i <= 20; i++) localStorage.removeItem('qDeadline_' + i);
+      localStorage.setItem('quizStartTime', Date.now());
+    }
+
+    const dlKey = 'qDeadline_' + n;
+    let deadline = parseInt(localStorage.getItem(dlKey)) || 0;
+    if (!deadline || deadline < Date.now()) {
+      deadline = Date.now() + QUESTION_TIME * 1000;
+      localStorage.setItem(dlKey, deadline);
+    }
+
+    function tick() {
+      const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+      el.textContent = remaining + 's';
+      if (remaining <= 10) {
+        el.className = 'badge bg-danger fs-6';
+      } else if (remaining <= 20) {
+        el.className = 'badge bg-warning text-dark fs-6';
+      } else {
+        el.className = 'badge bg-secondary fs-6';
+      }
+      if (remaining === 0) {
+        clearInterval(interval);
+        document.querySelector('form').submit();
+      }
+    }
+
+    tick();
+    const interval = setInterval(tick, 500);
+  })();
+</script>
 </body>
 </html>
