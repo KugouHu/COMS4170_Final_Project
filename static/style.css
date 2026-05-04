@@ -1,28 +1,23 @@
-/* ===================================================
-   COSMIC DARK THEME — Zodiac Constellations
-   =================================================== */
-
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap');
 
 :root {
-  --bg-deep:        #07071a;
-  --bg-card:        rgba(14, 14, 48, 0.88);
-  --bg-card-hover:  rgba(18, 18, 60, 0.95);
-  --border-glow:    rgba(100, 149, 237, 0.22);
+  --bg-deep: #08081f;
+  --bg-card: rgba(18, 16, 54, 0.88);
+  --bg-card-hover: rgba(22, 20, 66, 0.95);
+  --border-glow: rgba(100, 149, 237, 0.28);
   --border-gold:    rgba(244, 200, 66, 0.55);
-  --gold:           #f4c842;
-  --gold-soft:      #e8b84b;
+  --gold: #e6b93d;
+  --gold-soft: #d9aa38;
   --gold-dim:       rgba(244, 200, 66, 0.4);
   --silver:         #c8d4e8;
-  --silver-dim:     #7a8aa8;
-  --cosmic-blue:    #4a9eff;
-  --star-white:     #ffffff;
+  --silver-dim:     #8fa0bd;
+  --cosmic-blue:    #3f7fd1;
+  --star-white: #f5f7ff;
   --nebula-teal:    #2dd4a0;
-  --nebula-red:     #ff6b8a;
+  --nebula-red:     #e35d78;
   --info-blue:      #4ac8e8;
 }
 
-/* ---- Base ---- */
 *, *::before, *::after { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -30,16 +25,15 @@ html { scroll-behavior: smooth; }
 body {
   background-color: var(--bg-deep);
   background-image:
-    radial-gradient(ellipse at 20% 40%, rgba(30, 20, 80, 0.55) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(10, 30, 70, 0.45) 0%, transparent 55%),
-    radial-gradient(ellipse at 50% 80%, rgba(20, 10, 60, 0.4) 0%, transparent 50%);
+    radial-gradient(ellipse at 20% 40%, rgba(30, 20, 80, 0.55) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(10, 30, 70, 0.45) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(20, 10, 60, 0.4) 0%, transparent 45%);
   color: var(--silver);
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* Star canvas fixed behind everything */
 #star-canvas {
   position: fixed;
   top: 0; left: 0;
@@ -55,7 +49,6 @@ body {
 .navbar { z-index: 1030; }
 .profile-menu { z-index: 1031; }
 
-/* ---- Typography ---- */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Cinzel', 'Georgia', serif;
   color: var(--star-white);
@@ -64,7 +57,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   color: var(--gold);
-  text-shadow: 0 0 24px rgba(244, 200, 66, 0.45);
+  text-shadow: 0 0 24px rgba(222, 200, 66, 0.45);
 }
 
 h2 { color: var(--star-white); }
@@ -79,15 +72,11 @@ a:not(.btn):not(.navbar-brand) {
 }
 a:not(.btn):not(.navbar-brand):hover { color: var(--gold); }
 
-/* ---- Scrollbar ---- */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-deep); }
 ::-webkit-scrollbar-thumb { background: rgba(100, 149, 237, 0.35); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(74, 158, 255, 0.6); }
 
-/* ===================================================
-   NAVBAR
-   =================================================== */
 .navbar {
   background: rgba(5, 5, 22, 0.92) !important;
   border-bottom: 1px solid var(--border-glow) !important;
@@ -101,7 +90,7 @@ a:not(.btn):not(.navbar-brand):hover { color: var(--gold); }
   font-weight: 700;
   font-size: 1.05rem;
   letter-spacing: 0.06em;
-  text-shadow: 0 0 14px rgba(244, 200, 66, 0.5);
+  text-shadow: 0 0 14px rgba(233, 200, 66, 0.5);
 }
 
 .navbar .btn-outline-secondary {
@@ -123,14 +112,11 @@ a:not(.btn):not(.navbar-brand):hover { color: var(--gold); }
   font-size: 0.82rem;
 }
 .navbar .btn-outline-primary:hover {
-  background: rgba(244, 200, 66, 0.12) !important;
+  background: rgba(233, 200, 66, 0.12) !important;
   border-color: var(--gold) !important;
   color: var(--gold) !important;
 }
 
-/* ===================================================
-   CARDS
-   =================================================== */
 .card {
   background: var(--bg-card) !important;
   border: 1px solid var(--border-glow) !important;
@@ -144,7 +130,6 @@ a:not(.btn):not(.navbar-brand):hover { color: var(--gold); }
 .card-body   { color: var(--silver) !important; }
 .card-header { border-bottom: 1px solid var(--border-glow) !important; }
 
-/* Constellation cards — home grid */
 .constellation-card {
   cursor: pointer;
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
@@ -165,24 +150,17 @@ a:not(.btn):not(.navbar-brand):hover { color: var(--gold); }
   border-color: var(--gold) !important;
 }
 
-/* Card images */
 .card-img-top {
-  background: #0c0c2a !important;
+  background: #12122b !important;
   border-radius: 11px 11px 0 0 !important;
   filter: brightness(0.92) contrast(1.06);
 }
 
-/* ===================================================
-   TEXT UTILITIES
-   =================================================== */
 .text-muted { color: var(--silver-dim) !important; }
 .text-success { color: var(--nebula-teal) !important; }
 .text-danger  { color: var(--nebula-red)  !important; }
 .text-primary { color: var(--cosmic-blue) !important; }
 
-/* ===================================================
-   BUTTONS
-   =================================================== */
 .btn-primary {
   background: linear-gradient(135deg, #1a4080, #2563eb) !important;
   border-color: #3b82f6 !important;
@@ -220,7 +198,6 @@ a:not(.btn):not(.navbar-brand):hover { color: var(--gold); }
   color: var(--star-white) !important;
 }
 
-/* Quiz answer buttons */
 .btn-outline-secondary.w-100 { text-align: left; }
 .btn-outline-secondary.w-100:hover,
 .btn-outline-secondary.w-100.active {
@@ -230,9 +207,6 @@ a:not(.btn):not(.navbar-brand):hover { color: var(--gold); }
   box-shadow: 0 0 10px rgba(74, 158, 255, 0.2);
 }
 
-/* ===================================================
-   PROGRESS BAR
-   =================================================== */
 .progress {
   background: rgba(255, 255, 255, 0.07) !important;
   border-radius: 4px;
@@ -247,9 +221,6 @@ a:not(.btn):not(.navbar-brand):hover { color: var(--gold); }
   box-shadow: 0 0 8px rgba(45, 212, 160, 0.55);
 }
 
-/* ===================================================
-   TABLES
-   =================================================== */
 .table {
   color: var(--star-white) !important;
   --bs-table-bg: transparent;
@@ -278,9 +249,6 @@ a:not(.btn):not(.navbar-brand):hover { color: var(--gold); }
   background: rgba(74, 158, 255, 0.06) !important;
 }
 
-/* ===================================================
-   ALERTS
-   =================================================== */
 .alert { border-radius: 8px !important; }
 
 .alert-warning {
@@ -297,9 +265,6 @@ a:not(.btn):not(.navbar-brand):hover { color: var(--gold); }
 }
 .alert-info strong { color: var(--info-blue); }
 
-/* ===================================================
-   BADGES
-   =================================================== */
 .badge.bg-warning {
   background: var(--gold) !important;
   color: #1a0f00 !important;
@@ -308,9 +273,6 @@ a:not(.btn):not(.navbar-brand):hover { color: var(--gold); }
   letter-spacing: 0.04em;
 }
 
-/* ===================================================
-   FORMS
-   =================================================== */
 .form-control {
   background: rgba(255, 255, 255, 0.05) !important;
   border: 1px solid var(--border-glow) !important;
@@ -335,9 +297,6 @@ input[type="date"] { color-scheme: dark; }
 }
 .form-text { color: var(--silver-dim) !important; }
 
-/* ===================================================
-   RESULT PAGE — correct / incorrect cards
-   =================================================== */
 .border-success { border-color: rgba(45, 212, 160, 0.45) !important; }
 .border-danger  { border-color: rgba(255, 107, 138, 0.42) !important; }
 
@@ -352,9 +311,6 @@ input[type="date"] { color-scheme: dark; }
   border-bottom: 1px solid rgba(255, 107, 138, 0.28) !important;
 }
 
-/* ===================================================
-   LEARN PAGE — image + symbol
-   =================================================== */
 .learnImg {
   border: 1px solid var(--border-glow) !important;
   border-radius: 10px !important;
@@ -368,18 +324,12 @@ input[type="date"] { color-scheme: dark; }
   text-shadow: 0 0 18px rgba(244, 200, 66, 0.55);
 }
 
-/* ===================================================
-   QUIZ PAGE — image
-   =================================================== */
 .quizImg {
   border: 1px solid var(--border-glow) !important;
   border-radius: 8px !important;
   filter: brightness(0.92) contrast(1.05);
 }
 
-/* ===================================================
-   START / LANDING PAGE
-   =================================================== */
 .start-hero {
   text-align: center;
   padding-bottom: 1.2rem;
@@ -402,15 +352,11 @@ input[type="date"] { color-scheme: dark; }
   background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
 }
 
-/* ===================================================
-   HR / DIVIDERS
-   =================================================== */
 hr {
   border-color: var(--border-glow);
   opacity: 1;
 }
 
-/* ---- Profile dropdown in navbar ---- */
 .nav-divider {
   display: inline-block;
   width: 1px;
@@ -515,10 +461,6 @@ hr {
   font-size: 0.72rem;
 }
 
-/* ===================================================
-   BEST-SCORE PILL — tier-tinted achievement chip
-   Lives in the navbar profile dropdown, after birthday.
-   =================================================== */
 .profile-best-score {
   display: flex;
   width: fit-content;

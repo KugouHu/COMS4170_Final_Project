@@ -1,7 +1,3 @@
-/* ============================================================
-   Starfield canvas + image fallbacks
-   ============================================================ */
-
 function initStarfield() {
   const canvas = document.createElement('canvas');
   canvas.id = 'star-canvas';
@@ -15,8 +11,7 @@ function initStarfield() {
   }
   resize();
   window.addEventListener('resize', resize);
-
-  /* Stars */
+  
   const STAR_COUNT = 260;
   const stars = Array.from({ length: STAR_COUNT }, () => ({
     x:      Math.random(),
@@ -28,7 +23,6 @@ function initStarfield() {
     hue:    Math.random() < 0.15 ? 220 : Math.random() < 0.08 ? 45 : 0,
   }));
 
-  /* Constellation line groups (decorative, scattered across page) */
   const groups = Array.from({ length: 7 }, () => {
     const n = Math.floor(Math.random() * 4) + 3;
     return Array.from({ length: n }, () => ({ x: Math.random(), y: Math.random() }));
@@ -39,7 +33,6 @@ function initStarfield() {
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    /* Constellation lines */
     groups.forEach(pts => {
       ctx.beginPath();
       ctx.strokeStyle = 'rgba(100, 149, 237, 0.1)';
@@ -52,7 +45,6 @@ function initStarfield() {
       });
       ctx.stroke();
 
-      /* Small dot at each node */
       pts.forEach(p => {
         ctx.beginPath();
         ctx.arc(p.x * canvas.width, p.y * canvas.height, 1.2, 0, Math.PI * 2);
@@ -61,13 +53,11 @@ function initStarfield() {
       });
     });
 
-    /* Stars */
     stars.forEach(s => {
       const a = s.alpha * (0.55 + 0.45 * Math.sin(tick * s.speed + s.phase));
       const px = s.x * canvas.width;
       const py = s.y * canvas.height;
 
-      /* Core dot */
       ctx.beginPath();
       ctx.arc(px, py, s.r, 0, Math.PI * 2);
       if (s.hue === 45) {
@@ -78,8 +68,7 @@ function initStarfield() {
         ctx.fillStyle = `rgba(255, 255, 255, ${a})`;
       }
       ctx.fill();
-
-      /* Soft glow for larger stars */
+      
       if (s.r > 1.1) {
         const gr = ctx.createRadialGradient(px, py, 0, px, py, s.r * 4);
         if (s.hue === 45) {
@@ -102,13 +91,9 @@ function initStarfield() {
   draw();
 }
 
-/* ============================================================
-   DOM ready
-   ============================================================ */
 $(document).ready(function () {
   initStarfield();
 
-  /* Image fallbacks */
   $('.homeImg').on('error', function () {
     $(this).css('display', 'none');
   });
