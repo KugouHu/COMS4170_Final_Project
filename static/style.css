@@ -265,12 +265,9 @@ a:not(.btn):not(.navbar-brand):hover { color: var(--gold); }
 }
 .alert-info strong { color: var(--info-blue); }
 
-.badge.bg-warning {
-  background: var(--gold) !important;
-  color: #1a0f00 !important;
-  font-family: 'Cinzel', serif;
-  font-size: 0.6rem !important;
-  letter-spacing: 0.04em;
+.bg-warning {
+  background: darkgoldenrod !important;
+  border-bottom: 1px solid rgba(255, 107, 138, 0.28) !important;
 }
 
 .form-control {
