@@ -1,5 +1,11 @@
 # COMS4170 Final Project — Zodiac Constellations
 
+# Team Members
+
+- Faiz Shaikh — faiz-m-shaikh
+- Jingyan Hu — KugouHu
+- Nitish Kovuru — 
+
 An interactive web guide to the 12 zodiac constellations, built with Flask. Users enter their name and birthday to discover their zodiac sign, browse all 12 constellations, learn the details of each one, and test their knowledge with a short quiz.
 
 ## Features
